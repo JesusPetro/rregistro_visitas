@@ -11,6 +11,9 @@ model = []
 def index():
     return render_template('index.html')
 
+@app.route("/add_visitante")
+def add_visitante():
+    return render_template('add_visitante.html')
 """
 @app.route('/person_detail', methods=['POST'])
 def person_detail():
