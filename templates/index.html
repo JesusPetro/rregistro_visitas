@@ -1,34 +1,59 @@
 {% extends "base.html" %}
 
+
+
 {% block page_content %}
 <div class="row align-items-center g-lg-5 py-5">
-    <div class="col-lg-7 text-center text-lg-start">
-      <h1 class="display-4 fw-bold lh-1 mb-3">Bienvenido visitante UTB </h1>
-      <p class="col-lg-10 fs-4">accede nuestro portal y programa tu proxima visita tu proxima visita o registrate como visitante frecuente .</p>
-      <p class="col-lg-10 fs-4">Colaboremos con la seguridad de nuestra comunidad UTB .</p>
-    </div>
-    <div class="col-md-10 mx-auto col-lg-5">
-      <form  class="p-4 p-md-5 border rounded-3 bg-light">
-        <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword">Password</label>
-        </div>
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="w-100 btn btn-lg btn-success" type="submit">Sign up</button>
-        <hr class="my-4">
-        <h4><a class="link-success" href="/add_visitante">registrate</a></h4>
-      </form>
-    </div>
+  <div class="col-lg-7 text-center text-lg-start">
+    <h1 class="display-4 fw-bold lh-1 mb-3">Bienvenido visitante UTB </h1>
+    <p class="col-lg-10 fs-4">Registrate como visitante frecuente y programa tu proxima visita.</p>
+    <p class="col-lg-10 fs-4">Colaboremos con la seguridad de nuestra comunidad UTB .</p>
   </div>
+
+  <div class="col-md-10 mx-auto col-lg-5"> 
+            <!-- formulario para el registro de las visitas  -->
+  <form class="p-4 p-md-5 border rounded-3 bg-light" action="/add_visita" method="post">
+     <!-- mensajes de verificacion  -->      
+    {% with messages = get_flashed_messages()  %}
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    {% endif %}
+{% endwith %}
+    <h3 class="display-4 fw-bold lh-1 mb-3">Programar visita</h3>
+    <div class="form-floating mb-3">
+      <input type="email" class="form-control" name="e-mail" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="date" class="form-control" name="dia" id="">
+      <label for="floatingInput">Dia de visita</label>
+    </div>
+    <div class="checkbox mb-3">
+      
+    </div>
+    <div class="checkbox mb-3">
+      <button class="w-100 btn btn-lg btn-success" type="submit">Sign up</button>
+    </div>
+    <div class="checkbox mb-3">
+      <!-- link para el registro de los visitants -->
+      <a href="/info_visitante"><button type="button" class="btn btn-success btn-lg">Registrar visitante</button></a>
+    </div>
+  </form>
+</div>
 </div>
 
 
+
+
 {% endblock %}
+
+
+
+
+
+

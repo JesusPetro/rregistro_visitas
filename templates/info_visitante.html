@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+
+{% block page_content %}
+<div class="modal-dialog" role="document">
+  <div class="modal-content rounded-5 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <!-- <h5 class="modal-title">Modal title</h5> -->
+        <h2 class="fw-bold mb-0">Ingrese Sus Datos </h2>
+      </div>
+
+      <div class="modal-body p-5 pt-0">
+        <form action="/add_visitante" method="post">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control rounded-4" name="nombre">
+            <label for="floatingInput">nombre</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control rounded-4" name="apellido">
+            <label for="floatingPassword">apellido</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control rounded-4" name="e-mail">
+            <label for="floatingPassword"> E.mail </label>
+          </div>
+          <div class="form-floating mb-3">
+              <select class="form-select" aria-label="Default select example" name="tipo">
+                  <option selected><Q>Que Tipo de visitante es ?</Q></option>
+                  <option value="Estudiante">Estudiante</option>
+                  <option value="Profesor">TProfesor</option>
+                  <option value="Administrativo">Administrativo</option>
+                  <option value="Externo">Externo</option>
+                </select>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-4" name="placa">
+              <label for="floatingPassword">Placa de vehiculo</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-4" name="descripcion">
+              <label for="floatingPassword">Descripcion del vehiculo</label>
+            </div>
+            
+          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">Registrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+    
+{% endblock %}
+
