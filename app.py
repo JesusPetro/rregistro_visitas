@@ -2,8 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 from flask_bootstrap import Bootstrap
 
-
 app = Flask(__name__)
+
+app.config['MYSQL_HOST'] = 'localhost' 
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_DB'] = 'registro_acceso_vehicular'
+mysql = MySQL(app)
 
 # settings
 app.secret_key = "mysecretkey"
@@ -18,6 +23,9 @@ def index():
 def add_visita():
     e_mail = request.form['e-mail']
     dia = request.form['dia']
+    cur = mysql.connection.cursor()
+    cur.execute("INSERT INTO visitas (e-mail, fecha ) VALUES (%s,%s)",(e_mail, dia))
+    mysql.connection.commit()
     flash('Visita registrada satisfactoriamente')
     return redirect(url_for('index'))
 
@@ -36,6 +44,9 @@ def add_visitante():
     tipo = request.form['tipo']
     placa = request.form['placa']
     descripcion = request.form['descripcion']
+    cur = mysql.connection.cursor()
+    cur.execute("INSERT INTO visitantes (nombre, apellido, e-mail, tipo visitante, placa vehiculo, descripcion vehiculo ) VALUES (%s,%s,%s,%s,%s,%s)", (nombre, apellido, e_mail, tipo, placa, descripcion))
+    mysql.connection.commit()
     flash('Visitante agregado satisfactoriamente')
     return redirect(url_for('index'))
 """
