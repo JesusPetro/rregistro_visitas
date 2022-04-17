@@ -24,7 +24,7 @@ def add_visita():
     e_mail = request.form['e-mail']
     dia = request.form['dia']
     cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO visitas (e-mail, fecha ) VALUES (%s,%s)",(e_mail, dia))
+    cur.execute("INSERT INTO visitas (email, fecha ) VALUES (%s,%s)",(e_mail, dia))
     mysql.connection.commit()
     flash('Visita registrada satisfactoriamente')
     return redirect(url_for('index'))
@@ -45,7 +45,7 @@ def add_visitante():
     placa = request.form['placa']
     descripcion = request.form['descripcion']
     cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO visitantes (nombre, apellido, e-mail, tipo visitante, placa vehiculo, descripcion vehiculo ) VALUES (%s,%s,%s,%s,%s,%s)", (nombre, apellido, e_mail, tipo, placa, descripcion))
+    cur.execute("INSERT INTO visitantes (nombre, apellido, email, tipo_visitante, placa_vehiculo, descripcion_vehiculo ) VALUES (%s,%s,%s,%s,%s,%s)", (nombre, apellido, e_mail, tipo, placa, descripcion))
     mysql.connection.commit()
     flash('Visitante agregado satisfactoriamente')
     return redirect(url_for('index'))
