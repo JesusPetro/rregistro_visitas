@@ -4,6 +4,17 @@
 {% block page_content %}
 <div class="modal-dialog" role="document">
   <div class="modal-content rounded-5 shadow">
+         <!-- mensajes de verificacion  -->      
+         {% with messages = get_flashed_messages()  %}
+         {% if messages %}
+           {% for message in messages %}
+                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                   {{ message }}
+                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                 </div>
+           {% endfor %}
+         {% endif %}
+     {% endwith %}
       <div class="modal-header p-5 pb-4 border-bottom-0">
         <!-- <h5 class="modal-title">Modal title</h5> -->
         <h2 class="fw-bold mb-0">Ingrese Sus Datos </h2>
@@ -12,15 +23,15 @@
       <div class="modal-body p-5 pt-0">
         <form action="/add_visitante" method="post">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-4" name="nombre">
+            <input type="text" class="form-control rounded-4" name="nombre" required>
             <label for="floatingInput">nombre</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-4" name="apellido">
+            <input type="text" class="form-control rounded-4" name="apellido" required>
             <label for="floatingInput">apellido</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-4" name="e-mail">
+            <input type="email" class="form-control" name="e-mail" id="floatingInput" placeholder="name@example.com" required>
             <label for="floatingInput"> E.mail </label>
           </div>
           <div class="form-floating mb-3">
@@ -33,11 +44,11 @@
                 </select>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-4" name="placa">
+              <input type="text" class="form-control rounded-4" name="placa" required>
               <label for="floatingInput">Placa de vehiculo</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-4" name="descripcion">
+              <input type="text" class="form-control rounded-4" name="descripcion" required>
               <label for="floatingInput">Descripcion del vehiculo</label>
             </div>
             

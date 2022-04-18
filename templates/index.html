@@ -15,29 +15,29 @@
   <form class="p-4 p-md-5 border rounded-3 bg-light" action="/add_visita" method="post">
      <!-- mensajes de verificacion  -->      
     {% with messages = get_flashed_messages()  %}
-    {% if messages %}
+    
       {% for message in messages %}
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
       {% endfor %}
-    {% endif %}
+    
 {% endwith %}
     <h3 class="display-4 fw-bold lh-1 mb-3">Programar visita</h3>
     <div class="form-floating mb-3">
-      <input type="email" class="form-control" name="e-mail" id="floatingInput" placeholder="name@example.com">
+      <input type="email" class="form-control" name="e-mail" id="floatingInput" placeholder="name@example.com" required>
       <label for="floatingInput">Email address</label>
     </div>
     <div class="form-floating mb-3">
-      <input type="date" class="form-control" name="dia" id="">
+      <input type="date" class="form-control" name="dia" required>
       <label for="floatingInput">Dia de visita</label>
     </div>
     <div class="checkbox mb-3">
       
     </div>
     <div class="checkbox mb-3">
-      <button class="w-100 btn btn-lg btn-success" type="submit">Sign up</button>
+      <button class="w-100 btn btn-lg btn-success" type="submit">Confirmar</button>
     </div>
     <div class="checkbox mb-3">
       <!-- link para el registro de los visitants -->

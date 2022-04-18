@@ -23,11 +23,27 @@ def index():
 def add_visita():
     e_mail = request.form['e-mail']
     dia = request.form['dia']
+
+    # validamos la existencia del correo en la base de datos
     cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO visitas (email, fecha ) VALUES (%s,%s)",(e_mail, dia))
-    mysql.connection.commit()
-    flash('Visita registrada satisfactoriamente')
-    return redirect(url_for('index'))
+    cur.execute('SELECT * FROM visitantes')
+    visitantes = cur.fetchall()
+    cur = mysql.connection.cursor()
+    for visitante in visitantes:
+        if e_mail==visitante[3]:
+            cur.execute("INSERT INTO visitas (email, fecha ) VALUES (%s,%s)",(e_mail, dia))
+            mysql.connection.commit()
+            flash('Visita registrada satisfactoriamente')
+            return redirect(url_for('index'))
+        else:
+            msj_error=1
+
+    flash('Visita no registrada: el correo ingresado no se encuentra registrado como visitante ')
+    return render_template('index.html',msj_error=msj_error)
+
+
+
+    
 
 # pasamos a asolicitar los datos del visitante 
 @app.route("/info_visitante")
@@ -41,6 +57,17 @@ def add_visitante():
     nombre = request.form['nombre']
     apellido = request.form['apellido']
     e_mail = request.form['e-mail']
+
+    # validamos de que no se ingrese un correo ya existente en la base de datos
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM visitantes')
+    visitantes = cur.fetchall()
+    cur = mysql.connection.cursor()
+    for visitante in visitantes:
+        if e_mail==visitante[3]:
+            flash('El correo ingresado ya esta ascociado a otro visitante, porfavor usar otro ')
+            return render_template('info_visitante.html')
+            
     tipo = request.form['tipo']
     placa = request.form['placa']
     descripcion = request.form['descripcion']
@@ -49,16 +76,6 @@ def add_visitante():
     mysql.connection.commit()
     flash('Visitante agregado satisfactoriamente')
     return redirect(url_for('index'))
-"""
-@app.route('/person_detail', methods=['POST'])
-def person_detail():
-    id_person = request.form['id_person']
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    p = Person(id_person=id_person, name=first_name, last_name=last_name)
-    model.append(p)
-    return render_template('person_detail.html', value=p)
-"""
 
 
 if __name__ == '__main__':
